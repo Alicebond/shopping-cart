@@ -1,28 +1,8 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
 
 function App() {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => setData(data));
-    // fetch("https://fakestoreapi.com/carts")
-    //   .then((res) => res.json())
-    //   .then((json) => console.log(json));
-  }, []);
-
-  const productElements = data.map((i) => (
-    <div key={i.id} className="product">
-      <p>{i.title}</p>
-      <img src={i.image} />
-    </div>
-  ));
-
   return (
     <div className="app">
-      <Header />
       <div className="landing">
         <h1>Welcome to Shopping Now!</h1>
         <Link to="products">

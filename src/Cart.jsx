@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   return (
-    <div>
+    <div className="cart">
       <Link to="/">
         <p>{"<-----"}Back to homepage</p>
       </Link>
