@@ -1,12 +1,30 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Products = ({ items }) => {
+const Products = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
+
+  const productElements = data.map((i) => (
+    <div key={i.id} className="product">
+      <Link to={`${i.id}`}>
+        <p>{i.title}</p>
+        <img src={i.image} />
+      </Link>
+    </div>
+  ));
+
   return (
     <div>
-      <Link to="/" clasName="products-link">
+      <Link to="/" className="products-link">
         <p>{"<-----"}Back to homepage</p>
       </Link>
-      <div className="products">{items}</div>
+      <div className="products">{productElements}</div>
     </div>
   );
 };
