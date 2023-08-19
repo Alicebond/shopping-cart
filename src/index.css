@@ -17,7 +17,8 @@ body {
 
 .app,
 .cart,
-.products {
+.products,
+.header {
   width: 90vw;
 }
 

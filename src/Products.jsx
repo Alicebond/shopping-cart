@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Products = () => {
   const [data, setData] = useState([]);
-
+  console.log(data);
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
