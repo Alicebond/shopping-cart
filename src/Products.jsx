@@ -22,7 +22,7 @@ const Products = () => {
   return (
     <div>
       <Link to="/" className="products-link">
-        <p>{"<-----"}Back to homepage</p>
+        <p className="back">{"<-----"}Back to homepage</p>
       </Link>
       <div className="products">{productElements}</div>
     </div>

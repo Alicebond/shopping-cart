@@ -12,14 +12,30 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <Link to="/">
-        <p>{"<-----"}Back to homepage</p>
+      <Link to="/products">
+        <p className="back">{"<-----"}Back to all products</p>
       </Link>
-      <div>
-        <img src={product.image} />
-        <h2>{product.title}</h2>
-        <p>Price: ${product.price}</p>
-        <p>Description: {product.description}</p>
+      <div className="details">
+        <img src={product.image} className="grid-img" />
+        <div>
+          <h2 className="grid-title">{product.title}</h2>
+          <p className="grid-price">
+            <span className="bold">Price: </span>${product.price}
+          </p>
+        </div>
+        <p className="grid-describ">
+          <span className="bold">Description: </span>
+          {product.description}
+        </p>
+        <div className="grid-add">
+          <div>
+            <lable htmlFor="quantity">
+              <span className="bold">Quantity </span>
+            </lable>
+            <input id="quantity" />
+          </div>
+          <button className="btn add-btn">Add to Cart</button>
+        </div>
       </div>
     </div>
   );
