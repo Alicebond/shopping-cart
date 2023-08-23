@@ -3,12 +3,21 @@ import { Link, useParams } from "react-router-dom";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
+
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
       .then((res) => res.json())
       .then((json) => setProduct(json));
   }, [id]);
+
+  const onInputChange = (e) => {
+    e.preventDefault();
+    setQuantity(e.target.value);
+  };
+
+  const addToCart = (product, quantity) => {};
 
   return (
     <div>
@@ -28,13 +37,21 @@ const ProductDetail = () => {
           {product.description}
         </p>
         <div className="grid-add">
-          <div>
+          <div className="input-num">
             <lable htmlFor="quantity">
-              <span className="bold">Quantity </span>
+              <span className="bold">Quantity: </span>
             </lable>
-            <input id="quantity" />
+            <input
+              id="quantity"
+              value={quantity}
+              onChange={(e) => onInputChange(e)}
+              type="number"
+              min={1}
+            />
           </div>
-          <button className="btn add-btn">Add to Cart</button>
+          <button className="btn add-btn" onClick={addToCart}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
