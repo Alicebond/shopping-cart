@@ -42,9 +42,11 @@ body {
 }
 
 .start-btn {
-  padding: 2em;
+  border: 1px solid #bde0fe;
+  padding: 1.5em;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 img {
