@@ -23,11 +23,17 @@ body {
   width: 90vw;
 }
 
-.header {
+.header,
+.nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
+}
+
+.nav {
+  margin-right: 0;
+  gap: 4em;
 }
 
 .landing {
@@ -85,8 +91,8 @@ a {
 }
 
 .details {
-  width: 80vw;
-  margin: 0 auto;
+  width: 90vw;
+  margin: 4em auto 0;
   display: grid;
   grid-template: repeat(3, 1fr) / 1fr 1fr;
   text-align: start;

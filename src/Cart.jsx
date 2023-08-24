@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
-const Cart = () => {
+const Cart = ({ items, clearCart }) => {
+  const cartElements = items.map((i, index) => (
+    <div className="cart-item" key={index}>
+      <img src={i.image} />
+    </div>
+  ));
   return (
     <div className="cart">
-      <Link to="/">
-        <p className="back">{"<-----"}Back to homepage</p>
-      </Link>
       <h2>Cart page goes here</h2>
+      {cartElements}
+      <button onClick={clearCart}>Clear Cart</button>
     </div>
   );
 };

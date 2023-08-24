@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const ProductDetail = () => {
+const ProductDetail = ({ addCart }) => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
@@ -17,42 +17,38 @@ const ProductDetail = () => {
     setQuantity(e.target.value);
   };
 
-  const addToCart = (product, quantity) => {};
-
   return (
-    <div>
-      <Link to="/products">
-        <p className="back">{"<-----"}Back to all products</p>
-      </Link>
-      <div className="details">
-        <img src={product.image} className="grid-img" />
-        <div>
-          <h2 className="grid-title">{product.title}</h2>
-          <p className="grid-price">
-            <span className="bold">Price: </span>${product.price}
-          </p>
-        </div>
-        <p className="grid-describ">
-          <span className="bold">Description: </span>
-          {product.description}
+    <div className="details">
+      <img src={product.image} className="grid-img" />
+      <div>
+        <h2 className="grid-title">{product.title}</h2>
+        <p className="grid-price">
+          <span className="bold">Price: </span>${product.price}
         </p>
-        <div className="grid-add">
-          <div className="input-num">
-            <lable htmlFor="quantity">
-              <span className="bold">Quantity: </span>
-            </lable>
-            <input
-              id="quantity"
-              value={quantity}
-              onChange={(e) => onInputChange(e)}
-              type="number"
-              min={1}
-            />
-          </div>
-          <button className="btn add-btn" onClick={addToCart}>
-            Add to Cart
-          </button>
+      </div>
+      <p className="grid-describ">
+        <span className="bold">Description: </span>
+        {product.description}
+      </p>
+      <div className="grid-add">
+        <div className="input-num">
+          <lable htmlFor="quantity">
+            <span className="bold">Quantity: </span>
+          </lable>
+          <input
+            id="quantity"
+            value={quantity}
+            onChange={(e) => onInputChange(e)}
+            type="number"
+            min={1}
+          />
         </div>
+        <button
+          className="btn add-btn"
+          onClick={() => addCart(product, quantity)}
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );

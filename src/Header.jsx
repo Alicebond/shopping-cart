@@ -8,7 +8,13 @@ const Header = () => {
           <h1>Shopping Now!</h1>
         </Link>
 
-        <div>
+        <div className="nav">
+          <Link to="/">
+            <p>Home</p>
+          </Link>
+          <Link to="products">
+            <p>Products</p>
+          </Link>
           <Link to="cart">
             <p>
               Cart<span></span>

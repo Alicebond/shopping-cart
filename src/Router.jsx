@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import Products from "./Products.jsx";
@@ -6,6 +7,16 @@ import Header from "./Header.jsx";
 import ProductDetail from "./ProductDetail.jsx";
 
 const Router = () => {
+  const [cartItems, setCartItems] = useState([]);
+  function addCart(product, quantity) {
+    while (quantity > 0) {
+      setCartItems((prevCart) => [product, ...prevCart]);
+      quantity--;
+    }
+  }
+  function clearCart() {
+    setCartItems([]);
+  }
   const router = createBrowserRouter([
     {
       path: "/",
@@ -21,11 +32,11 @@ const Router = () => {
         },
         {
           path: "products/:id",
-          element: <ProductDetail />,
+          element: <ProductDetail addCart={addCart} />,
         },
         {
           path: "cart",
-          element: <Cart />,
+          element: <Cart items={cartItems} clearCart={clearCart} />,
         },
       ],
     },
