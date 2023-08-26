@@ -8,19 +8,23 @@ import ProductDetail from "./ProductDetail.jsx";
 
 const Router = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [num, setNum] = useState(0);
+
   function addCart(product, quantity) {
+    setNum((prevNum) => prevNum + +quantity);
     while (quantity > 0) {
       setCartItems((prevCart) => [product, ...prevCart]);
       quantity--;
     }
   }
   function clearCart() {
+    setNum(0);
     setCartItems([]);
   }
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Header />,
+      element: <Header num={num} />,
       children: [
         {
           index: true,

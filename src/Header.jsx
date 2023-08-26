@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ num }) => {
   return (
     <>
       <nav className="header">
@@ -17,7 +17,7 @@ const Header = () => {
           </Link>
           <Link to="cart">
             <p>
-              Cart<span></span>
+              Cart<span>{num ? `(${num})` : ""}</span>
             </p>
           </Link>
         </div>
