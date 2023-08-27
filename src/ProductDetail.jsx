@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const ProductDetail = ({ addCart }) => {
+const ProductDetail = ({ addCart, data }) => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then((res) => res.json())
-      .then((json) => setProduct(json));
-  }, [id]);
+    data.forEach((i) => {
+      // id is a string, i.id is a number;
+      if (i.id === +id) setProduct(i);
+    });
+  }, [data, id, product]);
 
   const onInputChange = (e) => {
     e.preventDefault();

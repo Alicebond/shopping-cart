@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Products = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
-
+const Products = ({ data, loading }) => {
   const productElements = data.map((i) => (
+    // Use `` to define value of to property inside Link,
+    // becase i.id is a number, but link need a string.
     <div key={i.id} className="product">
       <Link to={`${i.id}`}>
         <p>{i.title}</p>
@@ -17,6 +11,8 @@ const Products = () => {
       </Link>
     </div>
   ));
+
+  if (loading) return <h3>Loading...</h3>;
 
   return (
     <div>

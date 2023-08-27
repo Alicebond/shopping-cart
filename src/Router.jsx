@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import Products from "./Products.jsx";
@@ -8,23 +8,30 @@ import ProductDetail from "./ProductDetail.jsx";
 
 const Router = () => {
   const [cartItems, setCartItems] = useState([]);
-  const [num, setNum] = useState(0);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .finally(() => setLoading(false));
+  }, []);
 
   function addCart(product, quantity) {
-    setNum((prevNum) => prevNum + +quantity);
     while (quantity > 0) {
       setCartItems((prevCart) => [product, ...prevCart]);
       quantity--;
     }
   }
+
   function clearCart() {
-    setNum(0);
     setCartItems([]);
   }
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Header num={num} />,
+      element: <Header num={cartItems.length} />,
       children: [
         {
           index: true,
@@ -32,11 +39,11 @@ const Router = () => {
         },
         {
           path: "products",
-          element: <Products />,
+          element: <Products data={data} loading={loading} />,
         },
         {
           path: "products/:id",
-          element: <ProductDetail addCart={addCart} />,
+          element: <ProductDetail addCart={addCart} data={data} />,
         },
         {
           path: "cart",
