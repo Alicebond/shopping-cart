@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 import { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
@@ -20,7 +21,7 @@ const Router = () => {
 
   function addCart(product, quantity) {
     while (quantity > 0) {
-      setCartItems((prevCart) => [product, ...prevCart]);
+      setCartItems((prevCart) => [{ ...product, uid: uuidv4() }, ...prevCart]);
       quantity--;
     }
   }
@@ -28,6 +29,11 @@ const Router = () => {
   function clearCart() {
     setCartItems([]);
   }
+
+  function removeItem(id) {
+    setCartItems((prevCart) => prevCart.filter((i) => i.uid !== id));
+  }
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -47,7 +53,13 @@ const Router = () => {
         },
         {
           path: "cart",
-          element: <Cart items={cartItems} clearCart={clearCart} />,
+          element: (
+            <Cart
+              items={cartItems}
+              clearCart={clearCart}
+              removeItem={removeItem}
+            />
+          ),
         },
       ],
     },
