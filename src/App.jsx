@@ -6,7 +6,9 @@ function App() {
       <div className="landing">
         <h1>Welcome to Shopping Now!</h1>
         <Link to="products">
-          <button className="start-btn">Browse our products {"---->"}</button>
+          <button className="btn start-btn">
+            Browse our products {"---->"}
+          </button>
         </Link>
       </div>
     </div>
