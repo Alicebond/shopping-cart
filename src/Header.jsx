@@ -5,18 +5,18 @@ const Header = ({ num }) => {
     <>
       <nav className="header">
         <Link to="/">
-          <h1>Shopping Now!</h1>
+          <h1 className="logo">Shopping Now!</h1>
         </Link>
 
         <div className="nav">
           <Link to="/">
-            <p>Home</p>
+            <p className="header-link">Home</p>
           </Link>
           <Link to="products">
-            <p>Products</p>
+            <p className="header-link">Products</p>
           </Link>
           <Link to="cart">
-            <p>
+            <p className="header-link">
               Cart<span>{num ? `(${num})` : ""}</span>
             </p>
           </Link>

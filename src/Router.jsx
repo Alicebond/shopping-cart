@@ -11,6 +11,7 @@ const Router = () => {
   const [cartItems, setCartItems] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [subtotal, setSubtotal] = useState(0);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -22,16 +23,21 @@ const Router = () => {
   function addCart(product, quantity) {
     while (quantity > 0) {
       setCartItems((prevCart) => [{ ...product, uid: uuidv4() }, ...prevCart]);
+      setSubtotal((prevPrice) => (prevPrice += product.price));
       quantity--;
     }
   }
 
   function clearCart() {
     setCartItems([]);
+    setSubtotal(0);
   }
 
   function removeItem(id) {
     setCartItems((prevCart) => prevCart.filter((i) => i.uid !== id));
+    cartItems.forEach((i) => {
+      if (i.uid === id) setSubtotal((prevPrice) => (prevPrice -= i.price));
+    });
   }
 
   const router = createBrowserRouter([
@@ -58,6 +64,7 @@ const Router = () => {
               items={cartItems}
               clearCart={clearCart}
               removeItem={removeItem}
+              subtotal={subtotal}
             />
           ),
         },

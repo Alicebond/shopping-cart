@@ -29,6 +29,15 @@ body {
   margin: 0 auto;
 }
 
+.logo {
+  font-size: 2rem;
+}
+
+.header-link {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
 .nav {
   margin-right: 0;
   gap: 4em;
@@ -55,8 +64,7 @@ body {
   color: white;
 }
 
-.btn:hover,
-.btn:focus {
+.btn:hover {
   background-color: white;
   color: black;
 }
@@ -101,6 +109,11 @@ img {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.product a {
+  width: 100%;
+  height: 100%;
 }
 
 .details {
@@ -180,11 +193,11 @@ a {
 }
 
 .cart-total {
-  text-align: start;
+  text-align: end;
 }
 
 .cart-total .right {
-  margin: 0 9em;
+  margin-right: 10em;
 }
 
 .checkout {

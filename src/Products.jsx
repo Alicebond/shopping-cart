@@ -4,7 +4,7 @@ const Products = ({ data, loading }) => {
   const productElements = data.map((i) => (
     // Use `` to define value of to property inside Link,
     // becase i.id is a number, but link need a string.
-    <div key={i.id} className="product">
+    <div className="product" key={i.id}>
       <Link to={`${i.id}`}>
         <p>{i.title}</p>
         <img src={i.image} />
