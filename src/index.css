@@ -16,7 +16,6 @@ body {
 
 .app,
 .products,
-.header,
 .back {
   width: 90vw;
 }
@@ -24,7 +23,6 @@ body {
 .header,
 .nav {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin: 0 auto;
 }
@@ -209,3 +207,6 @@ a {
   padding: 0.7em 3em;
   font-size: 24px;
 }
+
+/* @media (max-width: 480px) {
+} */
