@@ -7,7 +7,7 @@ const Products = ({ data, loading }) => {
     <div className="product" key={i.id}>
       <Link to={`${i.id}`}>
         <p>{i.title}</p>
-        <img src={i.image} />
+        <img className="product-img" src={i.image} />
       </Link>
     </div>
   ));

@@ -16,6 +16,7 @@ body {
 
 .app,
 .products,
+.header,
 .back {
   width: 90vw;
 }
@@ -78,7 +79,7 @@ body {
   font-weight: 600;
 }
 
-img {
+.product-img {
   height: 150px;
 }
 
@@ -123,11 +124,15 @@ a {
 }
 
 .grid-img {
-  width: 65%;
+  width: 50%;
   height: auto;
   grid-column: 1 / 2;
   grid-row: 1 / -1;
-  text-align: start;
+  place-self: center;
+}
+
+.grid-price {
+  font-size: 22px;
 }
 
 .grid-add {
