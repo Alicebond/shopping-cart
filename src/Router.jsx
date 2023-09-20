@@ -4,8 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import Products from "./Products.jsx";
 import Cart from "./Cart.jsx";
-import Header from "./Header.jsx";
 import ProductDetail from "./ProductDetail.jsx";
+import Layout from "./Layout.jsx";
 
 const Router = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -43,7 +43,7 @@ const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Header num={cartItems.length} />,
+      element: <Layout num={cartItems.length} />,
       children: [
         {
           index: true,

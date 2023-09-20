@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="app">
       <div className="landing">
-        <h1 className="header">Welcome to Shopping Now!</h1>
+        <h1 className="temp-header">Welcome to Shopping Now!</h1>
         <Link to="products">
           <button className="btn start-btn">
             Browse our products {"---->"}

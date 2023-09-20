@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { BrowserRouter, MemoryRouter } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
 import App from "../src/App";
 
 // This is an example to show hot to write test
@@ -19,11 +21,10 @@ describe("true false tests", () => {
 
 // Real tests
 describe("App component", () => {
-  // Bug, to be fixed...
-  it("render correct heading", () => {
-    const { app } = render(<App />);
-    expect(app.querySelector(".header").textContent).toMatch(
-      /welcom to shopping now!/i
-    );
+  it("full app rendering/navigating", async () => {
+    const user = userEvent.setup();
+    render(<App />, { wrapper: BrowserRouter });
+    expect(screen.getByText(/welcome to shopping now!/i)).toBeInTheDocument();
+    // await user.click();
   });
 });

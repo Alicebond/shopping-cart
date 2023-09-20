@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = ({ num }) => {
   return (
@@ -17,12 +17,11 @@ const Header = ({ num }) => {
           </Link>
           <Link to="cart">
             <p className="header-link">
-              Cart<span>{num ? `(${num})` : ""}</span>
+              Cart<span>{num ? ` (${num})` : " (0)"}</span>
             </p>
           </Link>
         </div>
       </nav>
-      <Outlet />
     </>
   );
 };
