@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { waitFor, render, screen } from "@testing-library/react";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import App from "../src/App";
@@ -21,10 +21,26 @@ describe("true false tests", () => {
 
 // Real tests
 describe("App component", () => {
-  it("full app rendering/navigating", async () => {
-    const user = userEvent.setup();
+  it("renders correct heading", async () => {
     render(<App />, { wrapper: BrowserRouter });
     expect(screen.getByText(/welcome to shopping now!/i)).toBeInTheDocument();
-    // await user.click();
+  });
+
+  it("renders homepage button with correct text and btn class", () => {
+    render(<App />, { wrapper: BrowserRouter });
+    const button = screen.getByRole("button");
+    expect(button).toHaveClass("btn");
+    expect(button).toHaveTextContent("Browse our products ---->");
+  });
+
+  it("navigates to right page", async () => {
+    const user = userEvent.setup();
+    render(<App />, { wrapper: BrowserRouter });
+    const button = screen.getByRole("link", {
+      name: "Browse our products ---->",
+    });
+    await user.click(button);
+    // test failed, to be fixed
+    expect(screen.getByRole("generic")).toHaveClass("products");
   });
 });

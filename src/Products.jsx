@@ -14,11 +14,7 @@ const Products = ({ data, loading }) => {
 
   if (loading) return <h3>Loading...</h3>;
 
-  return (
-    <div>
-      <div className="products">{productElements}</div>
-    </div>
-  );
+  return <div className="products">{productElements}</div>;
 };
 
 export default Products;
