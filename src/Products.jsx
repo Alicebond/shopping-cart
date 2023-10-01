@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Products = ({ data, loading }) => {
-  const productElements = data.map((i) => (
+  const productElements = data?.map((i) => (
     // Use `` to define value of to property inside Link,
     // becase i.id is a number, but link need a string.
     <div className="product" key={i.id}>
@@ -14,7 +14,11 @@ const Products = ({ data, loading }) => {
 
   if (loading) return <h3>Loading...</h3>;
 
-  return <div className="products">{productElements}</div>;
+  return (
+    <div data-testId="products" className="products">
+      {productElements}
+    </div>
+  );
 };
 
 export default Products;
