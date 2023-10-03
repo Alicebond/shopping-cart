@@ -65,3 +65,20 @@ describe("Products component", () => {
     expect(screen.getByTestId("products")).toHaveClass("products");
   });
 });
+
+describe("ProductDetail component", () => {
+  it("have correct class", () => {
+    render(<ProductDetail />, { wrapper: BrowserRouter });
+    const image = document.querySelector("img");
+    expect(screen.getByTestId("details")).toHaveClass("details");
+    expect(image).toHaveClass("grid-img");
+    expect(screen.getByRole("heading", { level: 2 })).toHaveClass("grid-title");
+    const spans = document.querySelector("span");
+    console.log(spans);
+    expect(screen.getByText("Price:")).toBeInTheDocument();
+    expect(screen.getByText("Description:")).toBeInTheDocument();
+    expect(screen.getByText("Quantity:")).toBeInTheDocument();
+    expect(screen.getByText("Add to Cart")).toBeInTheDocument();
+    expect(screen.getByRole("button")).toHaveClass("btn", "add-btn");
+  });
+});

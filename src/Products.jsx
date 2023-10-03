@@ -6,7 +6,7 @@ const Products = ({ data, loading }) => {
     // becase i.id is a number, but link need a string.
     <div className="product" key={i.id}>
       <Link to={`${i.id}`}>
-        <p>{i.title}</p>
+        <h5>{i.title}</h5>
         <img className="product-img" src={i.image} />
       </Link>
     </div>
@@ -15,7 +15,7 @@ const Products = ({ data, loading }) => {
   if (loading) return <h3>Loading...</h3>;
 
   return (
-    <div data-testId="products" className="products">
+    <div data-testid="products" className="products">
       {productElements}
     </div>
   );
