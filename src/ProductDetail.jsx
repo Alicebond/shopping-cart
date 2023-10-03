@@ -38,11 +38,11 @@ const ProductDetail = ({ addCart, data }) => {
       </p>
       <div className="grid-add">
         <div className="input-num">
-          <lable htmlFor="quantity">
-            <span data-testId="bold" className="bold">
+          <label htmlFor="quantity">
+            <span data-testid="bold" className="bold">
               Quantity:{" "}
             </span>
-          </lable>
+          </label>
           <input
             id="quantity"
             value={quantity}
