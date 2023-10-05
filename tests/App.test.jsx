@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
@@ -67,18 +67,41 @@ describe("Products component", () => {
 });
 
 describe("ProductDetail component", () => {
-  it("have correct class", () => {
+  it("render a button, correct text, and class", () => {
     render(<ProductDetail />, { wrapper: BrowserRouter });
     const image = document.querySelector("img");
     expect(screen.getByTestId("details")).toHaveClass("details");
     expect(image).toHaveClass("grid-img");
     expect(screen.getByRole("heading", { level: 2 })).toHaveClass("grid-title");
-    const spans = document.querySelector("span");
-    console.log(spans);
     expect(screen.getByText("Price:")).toBeInTheDocument();
     expect(screen.getByText("Description:")).toBeInTheDocument();
     expect(screen.getByText("Quantity:")).toBeInTheDocument();
-    expect(screen.getByText("Add to Cart")).toBeInTheDocument();
-    expect(screen.getByRole("button")).toHaveClass("btn", "add-btn");
+    const button = screen.getByRole("button", { name: "Add to Cart" });
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveClass("btn", "add-btn");
+  });
+
+  it("should call onClick function when clicked", async () => {
+    const addCart = vi.fn();
+    const user = userEvent.setup();
+    render(<ProductDetail addCart={addCart} />, {
+      wrapper: BrowserRouter,
+    });
+    const button = screen.getByRole("button", { name: "Add to Cart" });
+    await user.click(button);
+    expect(addCart).toHaveBeenCalled();
+  });
+
+  it("should not not call onClick function when clicked", async () => {
+    const addCart = vi.fn();
+    render(<ProductDetail addCart={addCart} />, { wrapper: BrowserRouter });
+    expect(addCart).not.toHaveBeenCalled();
+  });
+});
+
+describe("Cart component", () => {
+  it("should show correct text", () => {
+    render(<Cart />, { wrapper: BrowserRouter });
+    expect(screen.getByText("Shopping Cart")).toBeInTheDocument();
   });
 });

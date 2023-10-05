@@ -6,7 +6,7 @@ function fixedNumber(x) {
 }
 
 const Cart = ({ items, clearCart, removeItem, subtotal }) => {
-  const cartElements = items.map((i, index) => {
+  const cartElements = items?.map((i, index) => {
     return (
       <div className="cart-style cart-item" key={index}>
         <div className="cart-style cart-left">
