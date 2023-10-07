@@ -196,6 +196,11 @@ a {
   gap: 2em;
 }
 
+.cart-left h3,
+.cart-left p {
+  margin: 0;
+}
+
 .item-price,
 .item-name {
   margin: 0 5em;

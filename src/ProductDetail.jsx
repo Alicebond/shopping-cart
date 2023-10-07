@@ -53,7 +53,9 @@ const ProductDetail = ({ addCart, data }) => {
         </div>
         <button
           className="btn add-btn"
-          onClick={() => addCart(product, quantity)}
+          onClick={() => {
+            +quantity && addCart(product, quantity);
+          }}
         >
           Add to Cart
         </button>

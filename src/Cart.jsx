@@ -11,11 +11,21 @@ const Cart = ({ items, clearCart, removeItem, subtotal }) => {
       <div className="cart-style cart-item" key={index}>
         <div className="cart-style cart-left">
           <img className="cart-image" src={i.image} />
-          <h3>{i.title}</h3>
+
+          <div>
+            <h3>{i.title}</h3>
+            <p>Price: ${i.price}</p>
+            <p>Quantity: {i.quantity}</p>
+          </div>
         </div>
         <div className="cart-style cart-right">
-          <p className="item-price">${i.price} CAD</p>
-          <button className="btn" onClick={() => removeItem(i.uid)}>
+          <p className="item-price">${i.price * i.quantity}</p>
+          <button
+            className="btn"
+            onClick={() => {
+              removeItem(i.uid);
+            }}
+          >
             Remove
           </button>
         </div>
@@ -43,9 +53,9 @@ const Cart = ({ items, clearCart, removeItem, subtotal }) => {
           <div>Total:</div>
         </div>
         <div className="right">
-          <div>${fixedNumber(subtotal)} CAD</div>
-          <div>${fixedNumber(taxRate * subtotal)} CAD</div>
-          <div>${fixedNumber(subtotal * (1 + taxRate))} CAD</div>
+          <div>${fixedNumber(subtotal)}</div>
+          <div>${fixedNumber(taxRate * subtotal)}</div>
+          <div>${fixedNumber(subtotal * (1 + taxRate))}</div>
         </div>
       </div>
       <div className="checkout">

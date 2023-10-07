@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import Products from "./Products.jsx";
@@ -12,6 +12,7 @@ const Router = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [subtotal, setSubtotal] = useState(0);
+  const price = useRef(0);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -21,11 +22,12 @@ const Router = () => {
   }, []);
 
   function addCart(product, quantity) {
-    while (quantity > 0) {
-      setCartItems((prevCart) => [{ ...product, uid: uuidv4() }, ...prevCart]);
-      setSubtotal((prevPrice) => (prevPrice += product.price));
-      quantity--;
-    }
+    setCartItems((prevCart) => [
+      { ...product, quantity: quantity, uid: uuidv4() },
+      ...prevCart,
+    ]);
+    price.current = product.price * quantity;
+    setSubtotal((prevPrice) => (prevPrice += price.current));
   }
 
   function clearCart() {
@@ -36,14 +38,23 @@ const Router = () => {
   function removeItem(id) {
     setCartItems((prevCart) => prevCart.filter((i) => i.uid !== id));
     cartItems.forEach((i) => {
-      if (i.uid === id) setSubtotal((prevPrice) => (prevPrice -= i.price));
+      if (i.uid === id)
+        setSubtotal((prevPrice) => (prevPrice -= i.price * i.quantity));
     });
+  }
+
+  function getNumInCart() {
+    let num = 0;
+    cartItems.forEach((i) => {
+      num += +i.quantity;
+    });
+    return num;
   }
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout num={cartItems.length} />,
+      element: <Layout num={getNumInCart() > 99 ? "99+" : getNumInCart()} />,
       children: [
         {
           index: true,
