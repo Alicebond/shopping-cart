@@ -19,7 +19,7 @@ const Cart = ({ items, clearCart, removeItem, subtotal }) => {
           </div>
         </div>
         <div className="cart-style cart-right">
-          <p className="item-price">${i.price * i.quantity}</p>
+          <p className="item-price">${fixedNumber(i.price * i.quantity)}</p>
           <button
             className="btn"
             onClick={() => {
